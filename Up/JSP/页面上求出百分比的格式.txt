@@ -1,0 +1,1 @@
+﻿<fmt:formatNumber value="${houseimpressionlist.comment/commentall*100}"  pattern="0"/>

@@ -1,0 +1,9 @@
+test.innerHTML: 
+　　也就是从对象的起始位置到终止位置的全部内容,包括Html标签。 
+　　上例中的test.innerHTML的值也就是“<span style="color:red">test1</span> test2 ”。 
+test.innerText: 
+　　从起始位置到终止位置的内容, 但它去除Html标签 
+　　上例中的text.innerTest的值也就是“test1 test2”, 其中span标签去除了。 
+test.outerHTML: 
+　　除了包含innerHTML的全部内容外, 还包含对象标签本身。 
+　　上例中的text.outerHTML的值也就是<div id="test"><span style="color:red">test1</span> test2</div>

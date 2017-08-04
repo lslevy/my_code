@@ -1,0 +1,6 @@
+slideToggle:控制显隐
+
+当点击鼠标时，隐藏或显示 p 元素：
+$("button").bind("click",function(){
+  $("p").slideToggle();
+});

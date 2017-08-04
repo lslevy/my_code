@@ -1,0 +1,93 @@
+﻿															Controller
+	/**
+	 * 
+	 * @Description : ajax检查角色名字是否重复
+	 * @param : @param request
+	 * @param : @return  
+	 * @return : String 
+	 * @throws : 
+	 * @author : 2311203422@qq.com（yixia）
+	 */
+	@RequestMapping(value="/rbac/checkname.action",produces="text/html;charset=UTF-8")
+	@ResponseBody
+	public String checkName(HttpServletRequest request){
+		CmsDocLibraryModel currentlibrarymodel = this.getCurrentLibrary(request);
+		Map<String, Object> map = new HashMap<String, Object>();
+		String strName = request.getParameter("name");
+		String strMsg="";//用于提示信息
+		if(StringUtils.isNotBlank(strName)){
+			map.put("name", strName);
+			map.put("libraryid", currentlibrarymodel.getId());
+			List<RbacRoleModel> list = rbacService.getRbacRoleModelList(map);
+			if(list.size()>0){
+				strMsg= "角色名字已存在";
+			}
+		}
+		
+		return strMsg;
+	}
+															Service
+															
+															
+public List<RbacRoleModel> getRbacRoleModelList(Map<String, Object> map ){
+		return rbacRoleDao.queryForList("com.rbac.dao.RbacDao.selectRbacRolebyLibraryIdOrName", map);
+	}															
+															
+															
+															
+															Xml
+如果name不为空的话且能对应数据库中name的值就会查处一条数据，似的list.size>0 以此来判断是否重名。															
+															
+  <!-- 查询所有角色 或者通过名字查询-->
+	     <select id="selectRbacRolebyLibraryIdOrName" resultType="rbacRoleModel" parameterType="int">
+	     	select * from sft_role where libraryid = #{libraryid}
+	     	<if test="name!=null"> and name = #{name}</if>
+	     	order by  sort desc
+	     </select>						
+
+
+
+
+
+	部分JSP
+	
+	
+	<div class="control-group">
+									<label class="control-label" for="accountname">资源名字</label>
+									<div class="controls">
+										<input type="text" name="name" id="name" onblur="checkname()" value="${appResourceModel.name }" placeholder="">*
+										<label id="nameMsg"></label>
+									</div>
+								</div>
+	
+	<script type="text/javascript"> 
+	var result= true;
+	function checkname(){
+	
+	if($("#rolename").val()!=""){
+		if($("#rolename").val()!='${rolemodel.name }'){
+			$.ajax({
+			url: "${pageContext.request.contextPath}/rbac/checkname.action",
+			type:"POST",
+			
+			data:{'name':$("#rolename").val()},
+			success: function(res){
+				
+				$("#msg").html(res);
+				if(res=="角色名字已存在"){ //角色已存在 不可提交
+				result=false;
+				
+				}
+			}
+		})   ;
+		}
+	}
+	else{
+		$("#msg").html("请输入角色名字");
+		}
+	}
+	
+	
+	
+	</script>
+		 

@@ -1,0 +1,30 @@
+﻿<resultMap type="levyTestModel" id="levyTestMap">
+		<id property="id" column="id" />  
+		<result property="name" column="name"/>
+		<result property="image" column="image"/>
+		<result property="gender" column="gender"/>
+		<result property="address" column="address"/>
+		<result property="sex" column="sex"/>
+		<result property="des" column="des"/>
+		<result property="photo" column="photo"/>
+    </resultMap>
+	 <insert id="insertredlevytest" parameterType="levyTestModel" useGeneratedKeys="true" keyProperty="id">
+			insert into levytest(id,name,image,gender,address,sex,des,photo)
+			values(#{id},#{name},#{image},#{gender},#{address},#{sex},#{des},#{photo})
+	</insert>
+	<select id="getLevyTestById" parameterType="int" resultMap="levyTestMap">
+			select * from levytest  where id=#{id}
+	</select>
+	<update id="updateLevyTest" parameterType="levyTestModel">
+			update levytest set name=#{name},image=#{image},gender=#{gender},address=#{address},sex=#{sex},des=#{des},photo=#{photo} where id=#{id}
+	</update>
+	 <select id="selectlevyTestCount"  resultType="java.lang.Integer"  >
+		   select count(*) from  levytest   
+	</select>
+	<select id="selectlevyTestList"    resultMap="levyTestMap"  >
+		   select * from levytest order by id
+		  <include  refid="com.yaotu.dao.BaseDao.commonPageQuery"/>
+	</select>
+	<delete id="deletelevyTestById" parameterType="int">
+			delete from levytest where id=#{id}
+	</delete> 

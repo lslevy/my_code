@@ -1,0 +1,9 @@
+﻿
+
+if(isNaN($.trim($("#name").val()))){ 
+				alert('请填写数字');
+				$.trim($("#name").val()).focus();
+				return ;
+		
+		
+		}

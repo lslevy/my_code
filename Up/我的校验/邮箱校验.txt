@@ -1,0 +1,12 @@
+
+<script type="text/javascript">
+fChkMail=function(szMail){
+var szReg=/^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
+var bChk=szReg.test(szMail);
+return bChk;
+}
+</script>
+<input type="text" id="Mail" value="" />
+<input type="button" value="验证邮箱地址" onclick="alert(fChkMail(document.getElementById('Mail').value));" />
+<p>邮箱不能以 - _ .以及其它特殊字符开头和结束</p>
+<p>邮箱域名结尾为2~5个字母，比如cn、com、name</p> 

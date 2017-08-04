@@ -1,0 +1,110 @@
+﻿													页面文本框添加时间------来自格子页面
+
+<jsp:useBean id="now" class="java.util.Date" />   
+								<fmt:formatDate value="${now}" type="both" dateStyle="long" pattern="yyyy-MM-dd HH:mm:ss" var="currentTime"/> 
+								
+								<div class="control-group" id="time_div">
+									<label class="control-label"  for="begintime">活动开始时间</label>
+									<div class="controls" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-MM-dd HH:mm:ss" data-link-field="begintime">
+										<input type="text" id="begintime" name="begintime" value="${secondgezimodel.begintime}"  placeholder="活动日期" >*
+										<i class="icon-calendar"></i>
+									</div>
+								</div>
+								<div class="control-group" id="offtime_div">
+									<label class="control-label"  for="endtime">活动结束时间</label>
+									<div class="controls" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy-MM-dd HH:mm:ss" data-link-field="endtime">
+										<input type="text" id="endtime" name="endtime" value="${secondgezimodel.endtime}"  placeholder="活动日期" >*
+										<i class="icon-calendar"></i>
+									</div>
+								</div>
+								
+													JavaScript
+													
+<script type="text/javascript">
+		    $('#begintime').datetimepicker({
+		        language:  'zh-CN',
+		        weekStart: 1,
+		        todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 2,
+				forceParse: 0,
+		        showMeridian: 1
+		    });
+			$('#endtime').datetimepicker({
+		        language:  'zh-CN',
+		        weekStart: 1,
+		        todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 2,
+				forceParse: 0,
+		        showMeridian: 1
+		    });
+		    var _time=$('#begintime').val();
+	$('#infotype').on('change', function() {
+		var infotypeSeleted = $('#infotype').val();
+		if(infotypeSeleted=='txt'){
+			//$('#kindeditor_div').hide();
+			$('#content_div').show();
+			
+			$('#time_div').show();
+			$('#begintime').val(_time);
+		}else if(infotypeSeleted=='html'){
+			$('#content_div').hide();
+			
+			//$('#kindeditor_div').show();
+			$('#time_div').show();
+			$('#begintime').val(_time);
+		}else if(infotypeSeleted=='url'){
+			//$('#kindeditor_div').hide();
+			$('#content_div').hide();
+			
+			$('#time_div').show();
+			$('#begintime').val(_time);
+		}else if(infotypeSeleted=='message'){
+			$('#time_div').hide();
+			$('#begintime').val("");
+		}
+		
+	});
+	var off_time=$('#endtime').val();
+	$('#infotype').on('change', function() {
+		var infotypeSeleted = $('#infotype').val();
+		if(infotypeSeleted=='txt'){
+			//$('#kindeditor_div').hide();
+			$('#offtime_div').show();
+			$('#endtime').val(off_time);
+		}else if(infotypeSeleted=='html'){
+			//$('#kindeditor_div').show();
+			$('#offtime_div').show();
+			$('#endtime').val(off_time);
+		}else if(infotypeSeleted=='url'){
+			//$('#kindeditor_div').hide();
+			$('#offtime_div').show();
+			$('#endtime').val(off_time);
+		}else if(infotypeSeleted=='message'){
+			$('#offtime_div').hide();
+			$('#endtime').val("");
+		}
+		
+	});
+	 K('#f_endpic').click(function () {
+				      editor.loadPlugin('image', function () {
+				            editor.plugin.imageDialog({
+				                imageUrl: K('#endpic').val(),
+				                clickFn: function (url, title, width, height, border, align) {
+				                    K('#endpic').val(url);
+				                    if (K('#thumb_img')) {
+				                        K('#endpic').hide();
+				                        K('#thumb_img').attr('src', url);
+				                        K('#thumb_img').show();
+				                        K('#f_endpic').val(getRootPath()+"/"+url);
+				                    }
+				                    editor.hideDialog();
+				                }
+				            });
+				        });
+				    });
+
+		</script>													

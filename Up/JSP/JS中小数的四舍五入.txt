@@ -1,0 +1,4 @@
+<script>
+var num=22.127456;
+alert( num.toFixed(2));
+</script>

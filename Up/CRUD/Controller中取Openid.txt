@@ -1,0 +1,1 @@
+String openid =(String)request.getSession().getAttribute(WxAppConstants.OPENID);

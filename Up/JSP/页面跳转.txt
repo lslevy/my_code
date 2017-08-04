@@ -1,0 +1,1 @@
+window.location.href = "<%=basePath%>appAddress/goOrderAddressAdd?myuser_id="+myuser_id+"&order_no="+order_no;

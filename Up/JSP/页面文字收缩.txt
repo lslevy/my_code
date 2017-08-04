@@ -1,0 +1,26 @@
+﻿</div>
+<!-- 项目简介 end -->
+<!-- 交通配套 start -->
+<div class="box box_up">
+	<h3>交通配套</h3>
+	<div class="box_info">
+		<p>从项目现场步行约7分钟即可达到11公里公交车站，站牌上，小编只看到3路公交线路，分别是大江厂——解放碑、鱼洞至较场口、611(南泉至黄泥磅)，但在小编等车期间，发现还有鱼洞至沙坪坝、鱼洞至南坪、鱼洞至李家沱，鱼洞至朝天门等多条线路可供出行选择。据小编不完全统计，有近10条公交线路，可直达渝中区、江北区、沙坪坝区。待到2012年轻轨3号线贯通，业主的出行将更为便捷。
+			<br>　　此外，项目别墅每户自有停车位，洋房地上拥有100个车库,地下850个车库，区域内有渝南大道、渝南分流道、巴南滨江路等，路网发达，待渝南分流道建成后，驾车15分钟即可抵达解放碑商圈。
+			<br>
+		</p>
+	</div> 
+	<a href="javascript:void(0);" class="btn_more on">
+
+
+
+
+<script type="text/javascript">
+	$(".btn_more").click(function(){
+		$(this).parent(".box").toggleClass("box_up");
+		if($(this).parent(".box").hasClass("box_up")){
+			$(this).find("span").html("更多");
+		}else{
+			$(this).find("span").html("收起");
+		}
+	});
+</script>

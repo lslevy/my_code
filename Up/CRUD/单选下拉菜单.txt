@@ -1,0 +1,20 @@
+﻿													文本框 下拉菜单----------来自格子页面
+													
+<c:if test="${secondgezimodel.id==null}">
+							<div class="control-group">
+								<label class="control-label" for="num">增加格子数目</label>
+								<select name="num" id="num" style="margin-left:20px;">
+									<!-- <option>请选择格子数</option> -->
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+								</select>
+							</div>
+							</c:if>													

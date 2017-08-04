@@ -1,0 +1,26 @@
+--------------------------------带小数点----------------------------
+$("#latitude").blur(function(){
+		var latitude=document.getElementById("latitude").value;
+		if(/[^\d.]/.test(latitude)){
+			alert('纬度只能输入数字');
+			document.getElementById("latitude").style.backgroundColor='pink';
+			document.getElementById("latitude").focus(); 
+		}else{
+			document.getElementById('latitude').style.backgroundColor='#fff'
+		}
+		});
+
+
+
+-----------------------------------存数字------------------------------
+	$("#buildingYear").blur(function(){
+		var buildingYear=document.getElementById("buildingYear").value;
+		if(/\D/.test(buildingYear)){
+			alert('建造年份只能输入数字');
+			document.getElementById("buildingYear").style.backgroundColor='pink';
+			document.getElementById("buildingYear").focus(); 
+		}else{
+			document.getElementById('buildingYear').style.backgroundColor='#fff'
+		}
+		});
+

@@ -1,0 +1,130 @@
+﻿若在一个页面上需要添加多张图片，则需要生成多个MyUUID.getUUID()(之前页面只需要上传一张图片时候，一般使用attachid)
+
+
+				Controller
+
+	/**
+	 * 
+	 * @Description : TODO
+	 * @param : @param 房产简介显示
+	 * @param : @return  
+	 * @return : ModelAndView 
+	 * @throws : 
+	 * @author : 351019187@qq.com（liusheng）
+	 */
+	@RequestMapping(value="/industry/house/houseintroduction.action")
+	public ModelAndView houseintroduction(HttpServletRequest request){
+		ModelAndView mv=new ModelAndView();
+		//String id = request.getParameter("id");
+		String libraryid = request.getParameter("libraryid");
+		if(StringUtils.isNotBlank(libraryid)){
+			HouseIntroduction	houseintroduction=houseService.getHouseIntroductionBylibraryid(Integer.valueOf(libraryid));
+			mv.addObject("houseintroduction",houseintroduction);
+			mv.addObject("pickfiles", MyUUID.getUUID());
+			mv.addObject("banner", MyUUID.getUUID());
+			mv.addObject("housebanner", MyUUID.getUUID());
+		}else{
+			mv.addObject("pickfiles", MyUUID.getUUID());
+			mv.addObject("banner", MyUUID.getUUID());
+			mv.addObject("housebanner", MyUUID.getUUID());
+		}
+		mv.addObject("sidebar", SIDEBAR_HOUSE);
+		mv.addObject("submenu", SUBMENU_INTRODUCTION);
+		mv.setViewName("/industry/house/houseintroduction");
+		return mv;
+	}
+
+
+
+					Jsp
+
+
+
+<input type="hidden" name="pickfiles" id="pickfiles" value="${houseintroduction.pickfiles!=null?houseintroduction.pickfiles:pickfiles}" >
+						<input type="hidden" name="housebanner" id="housebanner" value="${houseintroduction.housebanner!=null?houseintroduction.housebanner:housebanner}" >
+						<input type="hidden" name="banner" id="banner" value="${houseintroduction.banner!=null?houseintroduction.banner:banner}" >
+
+-----------------------------------------------------------------------------
+
+<div id="containerpickfiles" class="control-group">
+									<label class="control-label" for="pickfilesbtn">图文消息封面:</label>
+									<div class="controls">
+									<button  type="button"  id="pickfilesbtn" class="btn btn-purple btn-small">
+										选择文件<i class="icon-search icon-on-right bigger-110"></i>
+									</button>
+									<div id="filepickfiles"></div>
+									</div>
+								</div> 
+
+
+
+	<div id="containerbanner" class="control-group">
+									<label class="control-label" for="bannerbtn">楼盘头部图片:</label>
+									<div class="controls">
+									<button  type="button"  id="bannerbtn" class="btn btn-purple btn-small">
+										选择文件<i class="icon-search icon-on-right bigger-110"></i>
+									</button>
+									<div id="filebanner"></div>
+									</div>
+								</div>  
+
+
+
+
+							 <div id="containerhousebanner" class="control-group">
+									<label class="control-label" for="housebannerbtn">户型头部图片:</label>
+									<div class="controls">
+									<button  type="button"  id="housebannerbtn" class="btn btn-purple btn-small">
+										选择文件<i class="icon-search icon-on-right bigger-110"></i>
+									</button>
+									<div id="filehousebanner"></div>
+									</div>
+									<%-- <c:choose>//此处可设置默认图片
+									<c:when test="${cmsextluckdrawmodel.logo==null}">
+									<div id="logomoren" style="width:72px;height:72px;"><img alt="默认结束图片" src="${pageContext.request.contextPath}/mobile/marketing/luckdraw/images/yaotu.png"></div>
+									</c:when>
+									</c:choose> --%>
+								</div> 
+
+
+
+-----------------------------------------------------------------------------
+
+
+pluploadFun({
+		      //  hideDivId:"logomoren",//设置默认图片
+		        browse_button:"pickfilesbtn",
+		        buttonDivId:"containerpickfiles",
+		        fileListDivId:"filepickfiles",
+		        webRoot:"${pageContext.request.contextPath}",
+				basicid:"${houseintroduction.pickfiles==null?pickfiles:houseintroduction.pickfiles}",
+				filebuesstype:"cover_img",
+				absolutePath:"${pageContext.request.contextPath}",
+				editType:true,
+				fileType:"img"
+				});
+				
+	pluploadFun({
+		      //  hideDivId:"logomoren",//设置默认图片
+		        browse_button:"bannerbtn",
+		        buttonDivId:"containerbanner",
+		        fileListDivId:"filebanner",
+		        webRoot:"${pageContext.request.contextPath}",
+				basicid:"${houseintroduction.banner==null?banner:houseintroduction.banner}",
+				filebuesstype:"cover_img",
+				absolutePath:"${pageContext.request.contextPath}",
+				editType:true,
+				fileType:"img"
+				});			
+	pluploadFun({
+		      //  hideDivId:"logomoren",//设置默认图片
+		        browse_button:"housebannerbtn",
+		        buttonDivId:"containerhousebanner",
+		        fileListDivId:"filehousebanner",
+		        webRoot:"${pageContext.request.contextPath}",
+				basicid:"${houseintroduction.housebanner==null?housebanner:houseintroduction.housebanner}",
+				filebuesstype:"cover_img",
+				absolutePath:"${pageContext.request.contextPath}",
+				editType:true,
+				fileType:"img"
+				});

@@ -1,0 +1,6 @@
+double[] rate=null;//所有奖项的中奖概率
+			if(luckdrawprizelist!=null&&luckdrawprizelist.size()>0){
+				rate=new double[luckdrawprizelist.size()];
+				for(int i=0;i<luckdrawprizelist.size();i++){
+					rate[i]=luckdrawprizelist.get(i).getPercentage()/100d;//概率百分比转换为小数
+				}

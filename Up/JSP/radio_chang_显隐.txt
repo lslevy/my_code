@@ -1,0 +1,40 @@
+
+
+
+
+ <div class="control-group">
+                                    <label for="tel" class="control-label">每日限额开关：</label>
+                                    <div class="controls">
+                                        <label class="radio inline">
+                                            <input type="radio" class="js_opend" name="quota_switch" data-val="1" value="1"  />
+                                            开启
+                                        </label>
+                                        <label class="radio inline">
+                                            <input type="radio" class="js_opend" name="quota_switch" data-val="2" value="2"  />
+                                            关闭
+                                        </label>
+                                        <span class="help-inline">关闭后将不限制每日红包发放金额，若由开启转为关闭即时生效；<br/>若由关闭转为开启且关闭前无开启操作则限额即时生效，若有开启操作则新限额次日生效。</span>
+                                    </div>
+                                </div>
+
+                                <div class="control-group js_hide " >
+                                    <label for="tel" class="control-label">每日限额发放：</label>
+                                    <div class="controls">
+                                        <input type="text" name="quota" data-rule-budget="#budget"  id="quota" class="input-xlarge" data-rule-required="true" data-rule-ismoney="true" value="0"/>
+                                        <span class="help-inline">元 设置值需大于0且小于红包预算</span>
+                                    </div>
+                                </div>
+
+
+
+
+
+--------------------------js-----------------------
+
+ $(".js_opend").on("change",function(){
+            if($(this).data("val") == 1){
+                $("div.js_hide").removeClass("hide");
+            }else{
+                $("div.js_hide").addClass("hide");
+            }
+        })

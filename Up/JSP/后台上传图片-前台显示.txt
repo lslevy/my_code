@@ -1,0 +1,25 @@
+﻿				Model
+需要继承一个Model
+	private FileUploadModel mainfileuploadmodel;			
+
+				Controller
+
+List<FileUploadModel> coverImgList =fileUploadService.queryFileUploadList(houseintroduction.getBanner(),"cover_img");
+			mv.addObject("coverImgList",coverImgList);
+
+				Jsp
+前者可设置默认图片，后者设置为后台上传的图片
+<div class="cover" id="outercont">
+           <c:choose><c:when test="${coverImgList[0].completeurl==null}"><a><img src="${pageContext.request.contextPath}/mobile/industry/house/houseintroduction/imgs/estate_banner.png" width="720" height="175" /></a></c:when>
+					<c:otherwise><a><img src="${coverImgList[0].completeurl}" width="720" height="175"/></a></c:otherwise>
+			</c:choose>
+     </div>	
+
+
+
+本地使用的话
+
+List<HouseBanner> housebannerlist = houseService.getHouseBannerAndAlbumByID(Integer.valueOf(id));
+			mv.addObject("housebannerlist", housebannerlist);
+
+<img src="${pageContext.request.contextPath}/${housebannerlist.mainfileuploadmodel.filepath}"   style="width: 100%;"/>

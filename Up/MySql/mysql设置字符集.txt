@@ -1,0 +1,19 @@
+
+powerdesigner添加mysql的字符集ENGINE和DEFAULT CHARACTER SET 
+.
+分类： PowerDesigner2013-10-18 10:0075人阅读评论(0)收藏举报
+
+
+工具栏-》database-》edit current DBMS
+ 
+然后，选中：MYSQL50::Script\Objects\Table\Options
+ 
+在options末尾添加： 
+ENGINE = %s : list = BDB | HEAP | ISAM | InnoDB | MERGE | MRG_MYISAM | MYISAM, default = MYISAM
+ DEFAULT CHARACTER SET = %s : list = utf8 | gbk, default = utf8 
+COLLATE = %s : list = utf8_bin | utf8_general_ci | gbk_bin | gbk_chinese_ci, default = utf8_bin
+ 
+
+第一个：存储引擎 
+第二个：字符集 
+第三个：带bin是区分大小写，ci不区分

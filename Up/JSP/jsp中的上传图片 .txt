@@ -1,0 +1,38 @@
+﻿<input type="hidden" name="housebanner" id="housebanner" value="${houseintroduction.housebanner!=null?houseintroduction.housebanner:attachid}" >
+
+
+
+
+
+<div id="containerhousebanner" class="control-group">
+									<label class="control-label" for="housebannerbtn">户型头部图片:</label>
+									<div class="controls">
+									<button  type="button"  id="housebannerbtn" class="btn btn-purple btn-small">
+										选择文件<i class="icon-search icon-on-right bigger-110"></i>
+									</button>
+									<div id="filehousebanner"></div>
+									</div>
+									<%-- <c:choose>//此处可设置默认图片
+									<c:when test="${cmsextluckdrawmodel.logo==null}">
+									<div id="logomoren" style="width:72px;height:72px;"><img alt="默认结束图片" src="${pageContext.request.contextPath}/mobile/marketing/luckdraw/images/yaotu.png"></div>
+									</c:when>
+									</c:choose> --%>
+								</div> 
+
+
+
+
+
+
+pluploadFun({
+		      //  hideDivId:"logomoren",//设置默认图片
+		        browse_button:"housebannerbtn",
+		        buttonDivId:"containerhousebanner",
+		        fileListDivId:"filehousebanner",
+		        webRoot:"${pageContext.request.contextPath}",
+				basicid:"${houseintroduction.housebanner==null?attachid:houseintroduction.housebanner}",
+				filebuesstype:"cover_img",
+				absolutePath:"${pageContext.request.contextPath}",
+				editType:true,
+				fileType:"img"
+				});

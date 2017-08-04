@@ -1,0 +1,15 @@
+$(document).ready(function(){
+        $("input[type=checkbox][name=cashtypecard][value=${redpagemanagemodel.cashtypecard}]").attr("checked",true);  
+        $("input[type=checkbox][name=cashtypemall][value=${redpagemanagemodel.cashtypemall}]").attr("checked",true);
+        $("input[type=checkbox][name=cashtypeoffline][value=${redpagemanagemodel.cashtypeoffline}]").attr("checked",true);
+        $("input[type=checkbox][name=cashtypegiven][value=${redpagemanagemodel.cashtypegiven}]").attr("checked",true);
+
+          if($("#cashtypegiven").attr("checked")){
+        	$("#showdiv").show();
+        } 
+        
+         if($("#cashtypeoffline").attr("checked")){
+        	$("#showpwddiv").show();
+        } 
+
+            }); 

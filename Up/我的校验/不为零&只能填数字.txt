@@ -1,0 +1,8 @@
+﻿} else if ($.trim($("#stock").val()) == 0) {
+				alert('请填写物品数量！(不能为零)');
+				return ;
+			
+}else if(isNaN($.trim($("#stock").val()))){ 
+				alert('请填写物品数量！(不能为零)');
+				$.trim($("#stock").val()).focus();
+				return ;

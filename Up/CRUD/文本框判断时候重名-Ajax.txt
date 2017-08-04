@@ -1,0 +1,79 @@
+﻿--------------------------------Controller
+/**
+	 * 
+	 * @Description : ajax检查名字是否重复
+	 * @param : @param request
+	 * @param : @return  
+	 * @return : String 
+	 * @throws : 
+	 * @author : 2311203422@qq.com（yixia）
+	 */
+	@RequestMapping(value="/rbac/checkname.action",produces="text/html;charset=UTF-8")
+	@ResponseBody
+	public String checkName(HttpServletRequest request){
+		
+		CmsDocLibraryModel currentlibrarymodel = this.getCurrentLibrary(request);
+		Map<String, Object> map = new HashMap<String, Object>();
+		String strName = request.getParameter("name");
+		String strMsg="";//用于提示信息
+		if(StringUtils.isNotBlank(strName)){
+			map.put("name", strName);
+			map.put("libraryid", currentlibrarymodel.getId());
+			List<RbacRoleModel> list = rbacService.getRbacRoleModelList(map);
+			if(list.size()>0){
+				strMsg= "角色名字已存在";
+			}
+		}
+		
+		return strMsg;
+	}
+
+
+
+----------------------------------Service
+/**
+	 * 
+	 * @Description : 查看所有角色/根据名字查询角色
+	 * @param : @param map
+	 * @param : @return  
+	 * @return : List<RbacRoleModel> 
+	 * @throws : 
+	 * @author : 2311203422@qq.com（yixia）
+	 */
+	public List<RbacRoleModel> getRbacRoleModelList(Map<String, Object> map ){
+		
+		return rbacRoleDao.queryForList("com.rbac.dao.RbacDao.selectRbacRolebyLibraryIdOrName", map);
+	}
+
+
+												Xml
+当name不为空的时候，经行查询时若数据库中有与name相对应的值，就会查处一条数据
+list.size则为1大于0，页面判定为“用户名重复”。若是name传入的值与数据库中的值不匹配
+将会查询出一条空数据所以，list.size为0。												
+												
+<!-- 查询所有角色 或者通过名字查询-->
+	     <select id="selectRbacRolebyLibraryIdOrName" resultType="rbacRoleModel" parameterType="int">
+	     	select * from sft_role where libraryid = #{libraryid}
+	     	<if test="name!=null"> and name = #{name}</if>
+	     	order by  sort desc
+	     </select>												
+
+--------------------------------Jsp
+
+
+var result= true;
+	function checkname(){
+			$.ajax({
+			url: "${pageContext.request.contextPath}/sysmanager/system/checkname.action",
+			type:"POST",
+			data:{'name':$("#name").val()},
+			success: function(res){
+				
+				$("#msg").html(res);
+				if(res=="角色名字已存在"){ //角色已存在 不可提交
+				result=false;
+				}
+			}
+		})   ;
+	}
+

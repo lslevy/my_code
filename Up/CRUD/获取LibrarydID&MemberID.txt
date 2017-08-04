@@ -1,0 +1,11 @@
+2种方法
+1.Integer libraryid = this.getLibraryid(request);
+
+2.		CmsDocLibraryModel m=this.getCurrentLibrary(request);
+		m.getLibraryid();
+
+
+
+---------------------获取MemberID----------------
+
+CmsExtMemberModel currentmodel = this.getCurrentMember(request);

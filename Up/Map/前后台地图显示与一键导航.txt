@@ -1,0 +1,47 @@
+﻿要加上标签
+<%@include file="/WEB-INF/views/party/baiduapi.jsp" %>
+
+
+
+
+
+
+
+				后台
+<div class="control-group">
+         <label class="span2 control-label" for="hostaddress">地图标识</label>
+         <div class="span10 controls">
+                                        <div class="input-append">
+          <input type="text" name="hostaddress" id="hostaddress" value="${houseintroduction.hostaddress}" placeholder="主办地点">
+                                            <button class="btn" type="button" id="positioning">搜索</button>
+                                        </div>
+
+                                        <span class="maroon">注意：这个只是模糊定位，准确位置请地图上标注!</span>
+                                        <div id="l-map">
+                                            <i class="icon-spinner icon-spin icon-large"></i>地图加载中...
+                                        </div>
+                                        <div id="r-result">
+                                            经纬度：<input type="text" name="longitude" id="longitude" value="${houseintroduction.longitude}" placeholder="经度">
+                                           <input type="text" name="latitude" id="latitude" value="${houseintroduction.latitude}" placeholder="纬度">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+				前台
+外层的<a>用来一键导航
+内层的<img> 是抓取后台设置的地理位置图片
+
+
+
+<div class="box">
+	<h3>地图</h3>
+	<div class="box_map">
+		<div class="map_area">
+		<a href="http://api.map.baidu.com/marker?location=${houseintroduction.latitude},${houseintroduction.longitude}&title=${title}&content=${content}&output=html&src=wxapp"><img  src="http://api.map.baidu.com/staticimage?center=${houseintroduction.longitude},${houseintroduction.latitude}&width=600&height=200&zoom=18&markerStyles=s,A,0xff0000 " /></a>
+		</div>
+		<p>${houseintroduction.hostaddress}</p>
+	</div>
+</div>

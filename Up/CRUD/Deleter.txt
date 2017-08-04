@@ -1,0 +1,35 @@
+﻿															Deleter
+														   
+														   Controller
+//判断id不为空 根据Id取值 删除这条数据
+@RequestMapping(value="/stp/secondschooldelete.action")
+	public ModelAndView stpSecondSchool_Delete(Integer id){
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("sidebar",SUBMENU_SCHOOL);
+		if(id!=null){
+		SecondSchoolModel secondschoolmodel = secondPlatformService.getSecondSchool(id);
+		secondPlatformService.deleteSecondSchool(secondschoolmodel);
+		mv.setViewName("redirect:/stp/secondschoollist.action");
+		}
+		return mv;
+	}														   
+	
+														Services
+														
+public void deleteSecondSchool(SecondSchoolModel secondschoolmodel){
+		secondschooldao.delete("com.yaotu.dao.secondplatformdao.deleteSecondSchoolById", secondschoolmodel);
+	}
+
+
+														Xml
+														
+		<delete id="deleteSecondSchoolById" parameterType="int">
+			delete from school_school where id=#{id}
+		</delete>														
+		
+														Jsp
+														
+<button class="btn btn-mini btn-primary"
+	onclick="javascript:if(confirm('确实要删除吗?'))location='${pageContext.request.contextPath}/stp/secondschooldelete.action?id=${secondschoolmodel.id}'">
+		<i class="icon-user"></i>&nbsp;删除
+</button></td>													

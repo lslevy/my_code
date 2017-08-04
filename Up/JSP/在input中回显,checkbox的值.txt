@@ -1,0 +1,3 @@
+<input type="checkbox"
+									<c:if test="${cmsextluckdrawmodel.scoreset==1}">checked="checked" </c:if> 
+									value="1" offval="0" id="scoreset" name="scoreset"  class="editable ace ace-switch ace-switch-5" style="opacity: 0;">

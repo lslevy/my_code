@@ -1,0 +1,76 @@
+﻿				Controller
+
+@RequestMapping(value="/redpage/redpagelistall.action")
+	public ModelAndView redPageList(HttpServletRequest request){
+		ModelAndView mv=new ModelAndView();
+		String select = request.getParameter("select");
+		String name = request.getParameter("name");//input.value();
+		String username =null;
+		String tel =null;
+		int currentpage =Integer.valueOf(StringUtils.defaultIfBlank(request.getParameter("currentPage"), "1"));
+		Map<String, Object> searchMap = new HashMap<String, Object>();		
+		if(StringUtils.isNotBlank(select)){
+			if(select.equals("username")&&StringUtils.isNotBlank(name)){
+				username=name;
+				searchMap.put("username", username);
+			}else if(select.equals("tel")&&StringUtils.isNotBlank(name)){
+				tel = name;
+				searchMap.put("tel", tel);
+			}
+		}
+		PageQueryList<RedPageListModel> pagelist=marketingToolsService.queryRedPageList(searchMap,currentpage);
+		mv.addObject("pagelist",pagelist);
+		mv.addObject("sidebar", SIDEBAR_MARKETINGTOOLS);
+		mv.addObject("insidebar", SIDEBAR_REDPAPER);
+		mv.addObject("submenu", SUBMENU_REDMANAGE);
+		mv.setViewName("/redpage/redpagelist");
+		return mv;
+	}
+
+
+
+				Service
+public PageQueryList<RedPageListModel> queryRedPageList(Map<String, Object> searchMap ,int currentpage) {
+		PageQueryList<RedPageListModel> pagelist = new PageQueryList<RedPageListModel>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		pagelist.setCurrentPage(currentpage);
+		pagelist.setRecordsPerPage(BaseService.recordsPerPage);// 正式时，每页是5条记录，这里得到配置的值(5)基于覆盖常量(15),
+		return redpagelistdao.queryForPageList(
+				"com.marketing.dao.MarketingDao.selectRedPageListCount",
+				"com.marketing.dao.MarketingDao.selectpageRedPageList" , searchMap, pagelist);
+	}
+
+				Xml
+
+<select id="selectRedPageListCount"  resultType="java.lang.Integer"  >
+		   select count(*) from redpage_list  
+		   <where>
+		   <include refid="redpagesearch"/> 
+		  </where> 
+	</select>
+	 <select id="selectpageRedPageList"    resultMap="redPageListMap">
+			select * from redpage_list 
+		  <where>
+		   <include refid="redpagesearch"/> 
+		  </where> 
+			order by id
+	</select>
+	
+	<sql id="redpagesearch">
+		<if test="username!= null"> username = #{username} </if>
+		<if test="tel != null"> tel = #{tel}</if>
+	</sql>
+
+
+
+				Jsp
+
+<form action="" method="get" class="form-horizontal">
+						<input type="hidden" id="id" name="id"/>
+                                <select name="select" id="select" class="input-medium">  
+                                 <option value="username" >昵称</option>
+                                    <option value="tel" >手机号</option>
+                                </select>
+                                <input type="text" id="name" name="name" class="input-small-z" placeholder="请输入关键字" data-rule-required="true" value="" />
+                                <button class="btn">查询</button>
+                            </form>

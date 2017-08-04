@@ -1,0 +1,6 @@
+﻿<if test="pd.start_time !='' and pd.start_time != null">
+date_format(a.resume_time,'%Y%m%d') >= date_format(#{pd.start_time},'%Y%m%d')
+</if>
+<if test="pd.end_time !='' and pd.end_time != null">
+date_format(#{pd.end_time},'%Y%m%d') >= date_format(a.resume_time,'%Y%m%d') 
+</if>

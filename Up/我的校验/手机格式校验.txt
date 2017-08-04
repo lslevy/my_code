@@ -1,0 +1,25 @@
+<input  maxlength="11" onchange="phoneCheck(this.value)">
+
+<script>
+function phoneCheck(input){
+  if(input==""){
+    alert("手机号码不能为空！")
+
+    }
+
+  if(input!=""){
+	 var p1=/^(13[0-9]\d{8}|15[0-35-9]\d{8}|18[0-9]\{8}|14[57]\d{8})$/;
+
+	    var	b=false;
+	    if(p1.test(input)==b){
+		        alert("对不起，您输入的手机号码有错误。请输入正确的手机号码。");
+		        return false;
+	    }
+	    return true;
+  }
+}
+
+
+
+//校验
+/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/

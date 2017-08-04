@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FileUploadMapper">
+
+	<!-- 列表 -->
+	<select id="listPage" parameterType="page" resultType="pd">
+		select * from td_fileupload where deleteid=0
+	</select>
+	
+	<!-- 根据ID获取数据 -->
+	<select id="getCurrentFileData" parameterType="pd" resultType="pd">
+		select * from td_fileupload where id = #{id} 
+	</select>
+	
+	<!-- 新增数据  -->
+	<insert id="addCurrentFileData" parameterType="pd" >
+		insert into td_fileupload(filename,file_url)
+		values(#{filename},#{file_url})
+	</insert>
+	<!-- 更新数据 -->
+	<update id="updateCurrentFileData" parameterType="pd" >
+		update td_fileupload set filename = #{filename}, file_url = #{file_url} where id = #{id}
+	</update>
+	<!-- 删除 -->
+	<update id="deleteCurrentFileData" parameterType="pd">
+		update td_fileupload  set deleteid = #{deleteid}  where id = #{id}
+	</update>
+</mapper>

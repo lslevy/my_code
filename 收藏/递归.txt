@@ -1,0 +1,19 @@
+/**
+	 * 生成唯一的会员编码(QSH+随机6位数字)
+	 * @return
+	 * @throws Exception 
+	 */
+	private String getUserCode() throws Exception {
+		
+		// 用户编码 生成规则：QSH+随机6位数字
+		String userCode = "";
+		int[] i = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		String number = RandomUtil.getNotSimple(i, 6) + "";
+		userCode = "QSH" + number;
+		//去数据库中判断是否有重复的数据
+		int result = appMyuserService.checkDataUserCode(userCode);
+		if (result == 1) {
+			userCode = getUserCode();
+		}
+		return userCode;
+	}

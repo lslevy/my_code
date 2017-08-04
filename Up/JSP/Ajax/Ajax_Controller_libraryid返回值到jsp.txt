@@ -1,0 +1,1 @@
+resultJosnMap.put("libraryid", this.getCurrentLibrary(request).getId());

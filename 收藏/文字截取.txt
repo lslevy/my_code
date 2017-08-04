@@ -1,0 +1,9 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<c:choose>						
+										<c:when test="${fn:length(var.FACTION) >30}">
+												 ${fn:substring(var.FACTION, 0, 30)}... 
+												</c:when>
+												<c:otherwise>
+													${var.FACTION}
+												</c:otherwise>
+								</c:choose>

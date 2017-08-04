@@ -1,0 +1,55 @@
+<button class="btn btn-info" id="adds" type="button" data-loading-text="提交中...">
+										<i class="icon-save bigger-110"></i>
+										保存
+									</button>
+
+
+
+
+
+
+
+
+
+/*
+ * 初始化按钮的loading功能，点击后将显示Loading字样，并且按钮被disabled掉，无法连续点击，防止二次提交
+ * 超过3秒后按钮将恢复原状
+ */
+$('button[data-loading-text]').click(function () {
+    var btn = $(this).button('loading');
+    setTimeout(function () {
+        btn.button('reset');
+    }, 3000);
+});
+
+
+----------------------------另外一种------------------------------------------
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Bootstrap 实例 - 按钮（Button）插件加载状态</title>
+   <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+   <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<button id="fat-btn" class="btn btn-primary" data-loading-text="Loading..." 
+   type="button"> 加载状态
+</button>
+<script>
+   $(function() { 
+      $(".btn").click(function(){
+         $(this).button('loading').delay(3000).queue(function() {
+          // $(this).button('reset');
+         });        
+      });
+   });  
+</script>
+
+</body>
+</html>			
